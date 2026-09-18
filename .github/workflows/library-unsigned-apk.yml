@@ -15,7 +15,7 @@ concurrency:
 jobs:
   gate:
     name: Check Android release version
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, nucchuck]
     outputs:
       should_release: ${{ steps.release.outputs.should_release }}
       version: ${{ steps.release.outputs.version }}
@@ -74,7 +74,7 @@ jobs:
     name: Build unsigned APK for Library
     needs: gate
     if: needs.gate.outputs.should_release == 'true'
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, nucchuck]
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
